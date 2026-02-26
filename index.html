@@ -92,15 +92,10 @@ footer{background:#0f172a;color:white;text-align:center;padding:20px;font-size:1
     transition:transform 0.5s ease-in-out;
 }
 
-.carousel-slide{
-    display:flex;
-    gap:20px;
-    min-width:100%;
-}
-
-.carousel-slide img{
-    width:calc(33.333% - 13.333px); /* 3 zdjęcia w wierszu */
+.carousel-track img{
+    flex:0 0 16.666%; /* domyślnie 6 zdjęć na desktop */
     border-radius:12px;
+    margin-right:10px;
 }
 
 /* Strzałki */
@@ -117,19 +112,20 @@ footer{background:#0f172a;color:white;text-align:center;padding:20px;font-size:1
     border-radius:50%;
     z-index:10;
 }
+.carousel .prev{left:10px;}
+.carousel .next{right:10px;}
 
-.carousel .prev{
-    left:10px;
+/* RESPONSYWNOŚĆ */
+@media(max-width:1024px){ /* tablet */
+    .carousel-track img{flex:0 0 33.333%;} /* 3 zdjęcia */
 }
 
-.carousel .next{
-    right:10px;
+@media(max-width:768px){ /* telefon */
+    .carousel-track img{flex:0 0 50%;} /* 2 zdjęcia */
 }
 
-@media(max-width:768px){
-    .carousel-slide img{
-        width:100%; /* mobilnie jedno zdjęcie na raz */
-    }
+@media(max-width:480px){ /* mały telefon */
+    .carousel-track img{flex:0 0 100%;} /* 1 zdjęcie */
 }
 </style>
 </head>
@@ -242,16 +238,12 @@ zapewniając najwyższą jakość wykonania.
 <div class="carousel">
     <button class="prev">&#10094;</button>
     <div class="carousel-track">
-        <div class="carousel-slide">
-            <img src="images/cztery.jpeg" alt="Realizacja 1">
-            <img src="images/dwa.jpeg" alt="Realizacja 2">
-            <img src="images/piec.jpeg" alt="Realizacja 3">
-        </div>
-        <div class="carousel-slide">
-            <img src="images/raz.jpeg" alt="Realizacja 4">
-            <img src="images/szesc.jpeg" alt="Realizacja 5">
-            <img src="images/trzy.jpeg" alt="Realizacja 6">
-        </div>
+        <img src="images/cztery.jpeg" alt="Realizacja 1">
+        <img src="images/dwa.jpeg" alt="Realizacja 2">
+        <img src="images/piec.jpeg" alt="Realizacja 3">
+        <img src="images/raz.jpeg" alt="Realizacja 4">
+        <img src="images/szesc.jpeg" alt="Realizacja 5">
+        <img src="images/trzy.jpeg" alt="Realizacja 6">
     </div>
     <button class="next">&#10095;</button>
 </div>
@@ -273,27 +265,41 @@ zapewniając najwyższą jakość wykonania.
 
 <script>
 const track = document.querySelector('.carousel-track');
-const slides = Array.from(track.children);
+const images = Array.from(track.children);
 const nextButton = document.querySelector('.next');
 const prevButton = document.querySelector('.prev');
+
 let currentIndex = 0;
 
-// update widoku karuzeli
+// policz ile zdjęć widocznych na ekranie
+function getVisibleCount(){
+    const width = window.innerWidth;
+    if(width <= 480) return 1;
+    if(width <= 768) return 2;
+    if(width <= 1024) return 3;
+    return 6;
+}
+
 function updateCarousel(){
-    track.style.transform = 'translateX(-' + (currentIndex*100) + '%)';
+    const visibleCount = getVisibleCount();
+    const slideWidth = images[0].offsetWidth + 10; // dodajemy margin
+    const offset = slideWidth * currentIndex;
+    track.style.transform = `translateX(-${offset}px)`;
 }
 
 // przyciski
 nextButton.addEventListener('click',()=>{
-    currentIndex = (currentIndex + 1) % slides.length;
+    const visibleCount = getVisibleCount();
+    currentIndex = Math.min(currentIndex + visibleCount, images.length - visibleCount);
     updateCarousel();
 });
 prevButton.addEventListener('click',()=>{
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    const visibleCount = getVisibleCount();
+    currentIndex = Math.max(currentIndex - visibleCount,0);
     updateCarousel();
 });
 
-// obsługa swipe na touch
+// obsługa swipe
 let startX = 0;
 let isDragging = false;
 
@@ -306,7 +312,6 @@ track.addEventListener('touchmove', (e)=>{
     if(!isDragging) return;
     const moveX = e.touches[0].clientX;
     const diff = startX - moveX;
-    // jeśli przesunięcie większe niż 50px
     if(diff > 50){
         nextButton.click();
         isDragging = false;
@@ -316,11 +321,14 @@ track.addEventListener('touchmove', (e)=>{
     }
 });
 
-track.addEventListener('touchend', ()=>{
-    isDragging = false;
-});
+track.addEventListener('touchend', ()=>{isDragging=false;});
+
+// aktualizacja przy zmianie rozmiaru ekranu
+window.addEventListener('resize', updateCarousel);
+updateCarousel();
 </script>
 
 </body>
 </html>
+
 

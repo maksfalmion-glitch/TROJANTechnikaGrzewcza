@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TROJAN Technika Grzewcza</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#f5f7fa;color:#222;line-height:1.6}
+.container{width:90%;max-width:1200px;margin:auto}
+section{padding:80px 0}
+.section-title{text-align:center;margin-bottom:50px;font-size:32px;font-weight:700}
+
+/* HEADER */
+header{background:#0f172a;color:white;padding:20px 0}
+nav{display:flex;justify-content:space-between;align-items:center}
+nav ul{list-style:none;display:flex;gap:25px}
+nav a{color:white;text-decoration:none;font-weight:500}
+
+/* HERO */
+.hero{background:linear-gradient(to right,#0f172a,#1e293b);color:white;padding:100px 0;text-align:center}
+.hero h1{font-size:42px;margin-bottom:20px}
+.hero p{margin-bottom:30px;font-size:18px}
+.btn{display:inline-block;padding:14px 30px;background:#2563eb;color:white;text-decoration:none;border-radius:8px;font-weight:600;transition:.3s}
+.btn:hover{background:#1d4ed8}
+
+/* ABOUT */
+.about p{max-width:800px;margin:auto;text-align:center;font-size:18px}
+
+/* SERVICES */
+.services{background:white}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:30px}
+.service-card{background:#f1f5f9;padding:30px;border-radius:12px;transition:.3s}
+.service-card:hover{transform:translateY(-5px);background:#e2e8f0}
+.service-card h3{margin-bottom:15px}
+
+/* WHY */
+.why-us{background:#0f172a;color:white}
+.why-us ul{max-width:700px;margin:auto;list-style:none}
+.why-us li{margin-bottom:15px;font-size:18px}
+
+/* FORM */
+form{max-width:600px;margin:auto;background:white;padding:40px;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,0.1)}
+form input,form select,form textarea{
+width:100%;
+padding:12px;
+margin-bottom:15px;
+border:1px solid #ccc;
+border-radius:8px;
+font-family:inherit;
+}
+form textarea{resize:vertical;min-height:120px}
+form button{width:100%;border:none;cursor:pointer}
+
+/* MAP */
+.map iframe{width:100%;height:400px;border:0;border-radius:12px}
+
+/* CTA */
+.cta{background:#0f172a;color:white;text-align:center;padding:60px 20px}
+.cta h2{margin-bottom:20px}
+.cta-buttons{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;margin-top:20px}
+
+/* FOOTER */
+footer{background:#0f172a;color:white;text-align:center;padding:20px;font-size:14px}
+
+@media(max-width:768px){
+.hero h1{font-size:28px}
+}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container">
+<nav>
+<div><strong>TROJAN Technika Grzewcza</strong></div>
+<ul>
+<li><a href="#about">O firmie</a></li>
+<li><a href="#services">Usługi</a></li>
+<li><a href="#contact">Kontakt</a></li>
+</ul>
+</nav>
+</div>
+</header>
+
+<section class="hero">
+<div class="container">
+<h1>Profesjonalne Instalacje Grzewcze i Sanitarne</h1>
+<p>20+ lat doświadczenia w branży instalacyjnej. Kompleksowa realizacja inwestycji.</p>
+<a href="#contact" class="btn">Bezpłatna wycena</a>
+</div>
+</section>
+
+<section id="about" class="about">
+<div class="container">
+<h2 class="section-title">O Firmie</h2>
+<p>
+Specjalizujemy się w instalacjach centralnego ogrzewania, wodno-kanalizacyjnych,
+gazowych oraz systemach odnawialnych źródeł energii.
+Realizujemy projekty dla klientów indywidualnych i biznesowych,
+zapewniając najwyższą jakość wykonania.
+</p>
+</div>
+</section>
+
+<section id="services" class="services">
+<div class="container">
+<h2 class="section-title">Nasze Usługi</h2>
+<div class="services-grid">
+<div class="service-card">
+<h3>Instalacje grzewcze</h3>
+<p>Kotłownie gazowe, olejowe, ogrzewanie podłogowe, instalacje CO.</p>
+</div>
+<div class="service-card">
+<h3>Pompy ciepła</h3>
+<p>Montaż, serwis oraz systemy hybrydowe i automatyka.</p>
+</div>
+<div class="service-card">
+<h3>Instalacje wod-kan</h3>
+<p>Instalacje ciepłej i zimnej wody, kanalizacja, przyłącza.</p>
+</div>
+<div class="service-card">
+<h3>Serwis techniczny</h3>
+<p>Diagnostyka, pierwsze uruchomienia, konserwacja systemów grzewczych.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="why-us">
+<div class="container">
+<h2 class="section-title">Dlaczego My?</h2>
+<ul>
+<li>✔ Ponad 20 lat doświadczenia</li>
+<li>✔ Kompleksowa realizacja inwestycji</li>
+<li>✔ Profesjonalny serwis i doradztwo</li>
+<li>✔ Nowoczesne i energooszczędne rozwiązania</li>
+</ul>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<h2 class="section-title">Wyślij zapytanie</h2>
+
+<form action="send.php" method="POST">
+<input type="text" name="name" placeholder="Imię i nazwisko" required>
+<input type="tel" name="phone" placeholder="Telefon" required>
+<input type="email" name="email" placeholder="Email" required>
+
+<select name="service" required>
+<option value="">Wybierz usługę</option>
+<option>Instalacja grzewcza</option>
+<option>Pompa ciepła</option>
+<option>Instalacja wod-kan</option>
+<option>Serwis</option>
+</select>
+
+<textarea name="message" placeholder="Opisz czego dotyczy zapytanie..." required></textarea>
+
+<label style="font-size:14px">
+<input type="checkbox" required> Wyrażam zgodę na przetwarzanie danych.
+</label>
+
+<button class="btn" type="submit">Wyślij zapytanie</button>
+</form>
+
+</div>
+</section>
+
+<section class="map">
+<div class="container">
+<h2 class="section-title">Nasza lokalizacja</h2>
+<iframe src="https://www.google.com/maps?q=Krakow&output=embed"></iframe>
+</div>
+</section>
+
+<section class="cta">
+<h2>Potrzebujesz wyceny instalacji?</h2>
+<p>Zadzwoń lub wyślij zapytanie — odpowiadamy szybko.</p>
+<div class="cta-buttons">
+<a href="tel:122660206" class="btn"> Zadzwoń teraz</a>
+<a href="#contact" class="btn"> Wyślij zapytanie</a>
+</div>
+</section>
+
+<footer>
+© 2026 TROJAN Technika Grzewcza | Wszelkie prawa zastrzeżone
+</footer>
+
+</body>
+</html>
